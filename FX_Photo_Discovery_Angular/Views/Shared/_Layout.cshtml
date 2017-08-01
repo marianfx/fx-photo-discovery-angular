@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FX Photo Discovery</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - FX Photo Discovery</p>
+        </footer>
+    </div>
+    <script src="/node_modules/core-js/client/shim.min.js"></script>
+    <script src="/node_modules/zone.js/dist/zone.js"></script><!-- Zone = execution context for async tasks that persists across them. -->
+    <script src="/node_modules/systemjs/dist/system.src.js"></script> <!-- Dynamic Module Loaders (alongside with System.import('app') wich uses the loader to load the app) -->
+    <script src="/systemjs.config.js"></script> <!-- The config file we wrote (for ng) -->
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
