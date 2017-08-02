@@ -28,6 +28,9 @@ namespace FX_Photo_Discovery_Angular.Controllers
         public HttpResponseMessage Delete(int id)
         {
             var result = UserDb.APPUSERS.FirstOrDefault(x => x.ID == id);
+            if (result == null)
+                return ToJson(0);
+
             UserDb.APPUSERS.Remove(result);
             return ToJson(UserDb.SaveChanges());
         }
