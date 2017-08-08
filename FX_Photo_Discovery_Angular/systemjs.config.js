@@ -6,7 +6,8 @@
   // map tells the System loader where to look for things
   var map = {
     'app':                        'app', // 'dist',
-    '@angular':                   'node_modules/@angular',
+    '@angular': 'node_modules/@angular',
+    '@angular/material': 'npm:@angular/material/bundles/material.umd.js'
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
     // ng2-bootstrap

@@ -5,6 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';//commom things from core
 import { BrowserModule } from '@angular/platform-browser';//browser ref
 import { ReactiveFormsModule } from '@angular/forms';//for the user part (forms, not template-drive, but reactive - based on model)
 import { HttpModule } from '@angular/http';//htp stuff
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //import routing
 import { routing } from './app.routing';
@@ -12,6 +13,7 @@ import { routing } from './app.routing';
 //import declared components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
+import { UserComponent } from './components/user.component';
 
 //import services
 import { UserService } from './service/user.service';
@@ -19,9 +21,9 @@ import { UserService } from './service/user.service';
 
 // here we declare module metadatas
 @NgModule({
-    imports: [BrowserModule, ReactiveFormsModule, HttpModule, routing],//what MODULES this module loads
-    declarations: [AppComponent, HomeComponent],//what COMPONENTS this module has
-    providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService],//what SERVICES will be used (http operations here, using href)
+    imports: [BrowserModule, ReactiveFormsModule, HttpModule, routing, BrowserAnimationsModule],//what MODULES this module loads. Also loads the animations globally.
+    declarations: [AppComponent, HomeComponent, UserComponent],//what COMPONENTS this module has (this is the root module, so handles them all; will know to inject them.)
+    providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService],//what SERVICES will be used
     bootstrap: [AppComponent]//the ENTRY (start) COMPONENT
 })
 

@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
                 <div class='container-fluid'>
                     <ul class='nav navbar-nav'>
                     <li><a [routerLink]="['home']">Home</a></li><!-- [routerlink] uses the router to get a link for the 'home' name (defined in app.routing) -->
+                    <li><a [routerLink]="['user']">User Management</a></li>
                 </ul>
                 </div>
             </nav>    

@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - FX Photo Discovery</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="node_modules/@angular/material/prebuilt-themes/purple-green.css" rel="stylesheet"> <!-- import angular's theme -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Material Fonts -->
 </head>
 <body>
     <div class="container body-content">
@@ -17,6 +19,8 @@
     </div>
     <script src="/node_modules/core-js/client/shim.min.js"></script>
     <script src="/node_modules/zone.js/dist/zone.js"></script><!-- Zone = execution context for async tasks that persists across them. -->
+    
+    <!-- This three work together. -->
     <script src="/node_modules/systemjs/dist/system.src.js"></script> <!-- Dynamic Module Loaders (alongside with System.import('app') wich uses the loader to load the app) -->
     <script src="/systemjs.config.js"></script> <!-- The config file we wrote (for ng) -->
     <script>

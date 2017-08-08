@@ -20,7 +20,7 @@ export class UserService {//this is on the userside; will send requests to serve
 
     get(url: string): Observable<any> {
         return this._http.get(url) //this returns an Observable<Response> list
-            .map((response: Response) => response.json())//for each element of the list, map tells us what to do with it
+            .map((response: Response) => response.json())//for each element of the list, map tells us what to do with it (return). This will transform each element to JSON => the method will return finally an array of JSON
             .do((data) => console.log(JSON.stringify(data)))//i think this executed at the end, but don't know for sure
             .catch(this.handleError);//catch the error
     }

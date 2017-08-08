@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("@angular/router"); //load the router
 var home_component_1 = require("./components/home.component"); //load the home component
+var user_component_1 = require("./components/user.component");
 var appRoutes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: home_component_1.HomeComponent } //home
+    { path: 'home', component: home_component_1.HomeComponent },
+    { path: 'user', component: user_component_1.UserComponent }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
 //# sourceMappingURL=app.routing.js.map

@@ -18,6 +18,7 @@ var app_routing_1 = require("./app.routing");
 //import declared components
 var app_component_1 = require("./app.component");
 var home_component_1 = require("./components/home.component");
+var user_component_1 = require("./components/user.component");
 //import services
 var user_service_1 = require("./service/user.service");
 // here we declare module metadatas
@@ -30,7 +31,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.ReactiveFormsModule, http_1.HttpModule, app_routing_1.routing],
-        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent],
+        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, user_component_1.UserComponent],
         providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, user_service_1.UserService],
         bootstrap: [app_component_1.AppComponent] //the ENTRY (start) COMPONENT
     })
