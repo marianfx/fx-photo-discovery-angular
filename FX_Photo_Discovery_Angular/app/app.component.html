@@ -1,0 +1,9 @@
+﻿<div>
+    <md-toolbar color="primary">
+        <a md-button [routerLink]="['home']"><md-icon>home</md-icon>Home</a><!-- [routerlink] uses the router to get a link for the 'home' name (defined in app.routing) -->
+        <a md-button [routerLink]="['user']"><md-icon>transfer_within_a_station</md-icon>User Management</a>
+    </md-toolbar>
+    <div class='container'>
+        <router-outlet></router-outlet><!-- here will be loaded the dynamic view Components. Can be declared with names. -->
+    </div>
+</div>     

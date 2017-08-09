@@ -1,0 +1,32 @@
+﻿<!-- This is selected with the ViewChild based on #modal -->
+<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+    <!-- Specified the name of this form from the typescript file. [xxx] = property binding-->
+    <h2 md-dialog-title>{{data.modalTitle}}</h2>
+    <div md-dialog-content>
+        <div class="form-group">
+            <div>
+                <span>Username*</span>
+                <input type="text" class="form-control" placeholder="Username" formControlName="Username"><!-- formControllName represents the name that this input will have (so can be linked with .ts)-->
+            </div>
+            <div>
+                <span>Display Name</span>
+                <input type="text" class="form-control" placeholder="Display Name" formControlName="DisplayName">
+            </div>
+            <div>
+                <span>Gender*</span>
+                <select formControlName="Gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+            <div>
+                <span>Profile URL</span>
+                <input type="text" class="form-control" placeholder="http://www.instagram.com/xxx" formControlName="ProfileUrl">
+            </div>
+        </div>
+    </div>
+    <div md-dialog-actions>
+        <a class="btn btn-default" (click)="onClose()">Cancel</a>
+        <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">{{data.modalBtnTitle}}</button><!-- the button will be enabled when the form is valid ([disables] property)-->
+    </div>
+</form>

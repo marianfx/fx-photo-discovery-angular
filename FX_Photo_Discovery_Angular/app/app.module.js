@@ -13,12 +13,16 @@ var common_1 = require("@angular/common"); //commom things from core
 var platform_browser_1 = require("@angular/platform-browser"); //browser ref
 var forms_1 = require("@angular/forms"); //for the user part (forms, not template-drive, but reactive - based on model)
 var http_1 = require("@angular/http"); //htp stuff
+var material_1 = require("@angular/material");
+var cdk_1 = require("@angular/cdk");
+var animations_1 = require("@angular/platform-browser/animations");
 //import routing
 var app_routing_1 = require("./app.routing");
 //import declared components
 var app_component_1 = require("./app.component");
 var home_component_1 = require("./components/home.component");
 var user_component_1 = require("./components/user.component");
+var modal_component_1 = require("./components/modal.component");
 //import services
 var user_service_1 = require("./service/user.service");
 // here we declare module metadatas
@@ -30,9 +34,10 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.ReactiveFormsModule, http_1.HttpModule, app_routing_1.routing],
-        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, user_component_1.UserComponent],
+        imports: [platform_browser_1.BrowserModule, animations_1.BrowserAnimationsModule, forms_1.ReactiveFormsModule, http_1.HttpModule, app_routing_1.routing, material_1.MdDialogModule, material_1.MdToolbarModule, material_1.MdButtonModule, material_1.MdIconModule, material_1.MdCardModule, cdk_1.CdkTableModule, material_1.MdTableModule],
+        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, user_component_1.UserComponent, modal_component_1.ModalComponent],
         providers: [{ provide: common_1.APP_BASE_HREF, useValue: '/' }, user_service_1.UserService],
+        entryComponents: [modal_component_1.ModalComponent],
         bootstrap: [app_component_1.AppComponent] //the ENTRY (start) COMPONENT
     })
     // here the actual module is exported

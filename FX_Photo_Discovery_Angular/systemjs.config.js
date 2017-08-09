@@ -5,37 +5,45 @@
 (function(global) {
   // map tells the System loader where to look for things
   var map = {
-    'app':                        'app', // 'dist',
+    'app': 'app', // 'dist',
     '@angular': 'node_modules/@angular',
-    '@angular/material': 'npm:@angular/material/bundles/material.umd.js'
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    'rxjs':                       'node_modules/rxjs',
-    // ng2-bootstrap
-    'moment': 'node_modules/moment',
-    'ng2-bootstrap': 'node_modules/ng2-bootstrap',
-    'ng2-bs3-modal': 'node_modules/ng2-bs3-modal'//added by ME; here practically tells it where are the modules to load; will add them to 'bundles' dir
+    '@angular/core': 'node_modules/@angular/core',
+    '@angular/animations': 'node_modules/@angular/animations',
+    '@angular/common': 'node_modules/@angular/common',
+    '@angular/compiler': 'node_modules/@angular/compiler',
+    '@angular/http': 'node_modules/@angular/http',
+    '@angular/forms': 'node_modules/@angular/forms',
+    '@angular/router': 'node_modules/@angular/router',
+    '@angular/platform-browser': 'node_modules/@angular/platform-browser',
+    '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic',
+    '@angular/animations/browser': 'node_modules/@angular/animations/bundles/animations-browser.umd.js',
+    '@angular/platform-browser/animations': 'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+    '@angular/material': 'node_modules/@angular/material',
+    '@angular/cdk': 'node_modules/@angular/cdk',
+
+    'rxjs':                       'node_modules/rxjs'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' },
+    'rxjs':                       { main: 'index', defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    // ng2-bootstrap
-    'ng2-bootstrap':              { format: 'cjs', main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
-    'moment': { main: 'moment.js', defaultExtension: 'js' },
-    'ng2-bs3-modal': {main: 'bundles/ng2-bs3-modal.js', defaultExtension: 'js'}//tell it the main js from the bundles dir
   };
+
   var ngPackageNames = [
+    'core',
+    'animations',
     'common',
     'compiler',
-    'core',
-    'forms',
     'http',
+      'forms',
+      'router',
     'platform-browser',
     'platform-browser-dynamic',
-    'router',
     'router-deprecated',
-    'upgrade',
+      'upgrade',
+      'material',
+    'cdk',
   ];
   // Individual files (~300 requests):
   function packIndex(pkgName) {
@@ -49,9 +57,11 @@
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
   // Add package entries for angular packages
   ngPackageNames.forEach(setPackageConfig);
+
   var config = {
     map: map,
     packages: packages
   };
   System.config(config);
+
 })(this);

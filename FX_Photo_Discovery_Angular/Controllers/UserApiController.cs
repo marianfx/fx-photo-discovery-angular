@@ -10,16 +10,16 @@ namespace FX_Photo_Discovery_Angular.Controllers
     {
         public HttpResponseMessage Get()
         {
-            return ToJson(UserDb.APPUSERS.AsEnumerable());
+            return ToJson(UserDb.AppUsers.AsEnumerable());
         }
 
-        public HttpResponseMessage Post([FromBody] APPUSER value)
+        public HttpResponseMessage Post([FromBody] AppUser value)
         {
-            UserDb.APPUSERS.Add(value);
+            UserDb.AppUsers.Add(value);
             return ToJson(UserDb.SaveChanges());
         }
 
-        public HttpResponseMessage Put([FromBody] APPUSER value)
+        public HttpResponseMessage Put([FromBody] AppUser value)
         {
             UserDb.Entry(value).State = EntityState.Modified;
             return ToJson(UserDb.SaveChanges());
@@ -27,11 +27,11 @@ namespace FX_Photo_Discovery_Angular.Controllers
 
         public HttpResponseMessage Delete(int id)
         {
-            var result = UserDb.APPUSERS.FirstOrDefault(x => x.ID == id);
+            var result = UserDb.AppUsers.FirstOrDefault(x => x.Id == id);
             if (result == null)
                 return ToJson(0);
 
-            UserDb.APPUSERS.Remove(result);
+            UserDb.AppUsers.Remove(result);
             return ToJson(UserDb.SaveChanges());
         }
     }

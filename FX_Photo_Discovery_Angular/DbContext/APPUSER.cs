@@ -12,12 +12,12 @@ namespace FX_Photo_Discovery_Angular.DbContext
     using System;
     using System.Collections.Generic;
     
-    public partial class APPUSER
+    public partial class AppUser
     {
-        public int ID { get; set; }
-        public string USERNAME { get; set; }
-        public string DISPLAYNAME { get; set; }
-        public string GENDER { get; set; }
-        public string PROFILEURL { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string DisplayName { get; set; }
+        public string Gender { get; set; }
+        public string ProfileUrl { get; set; }
     }
 }

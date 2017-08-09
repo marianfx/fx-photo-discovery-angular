@@ -16,7 +16,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'user-app',
-        template: "\n        <div>\n            <nav class='navbar navbar-inverse'>\n                <div class='container-fluid'>\n                    <ul class='nav navbar-nav'>\n                    <li><a [routerLink]=\"['home']\">Home</a></li><!-- [routerlink] uses the router to get a link for the 'home' name (defined in app.routing) -->\n                    <li><a [routerLink]=\"['user']\">User Management</a></li>\n                </ul>\n                </div>\n            </nav>    \n        <div class='container'>\n            <router-outlet></router-outlet><!-- here will be loaded the dynamic view Components. Can be declared with names. -->\n        </div>\n        </div>     \n"
+        templateUrl: 'app/app.component.html'
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

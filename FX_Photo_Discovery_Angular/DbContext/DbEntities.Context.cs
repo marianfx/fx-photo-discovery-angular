@@ -25,6 +25,6 @@ namespace FX_Photo_Discovery_Angular.DbContext
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<APPUSER> APPUSERS { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
     }
 }

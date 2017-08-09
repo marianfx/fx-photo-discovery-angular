@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,26 +20,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core"); //OnInit event + ViewChild to acces modal data
-var forms_1 = require("@angular/forms"); //load reactive forms + validations
-var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal"); //modal for ng
-var user_service_1 = require("../Service/user.service");
-var global_1 = require("../Shared/global");
-var optype_1 = require("../Shared/optype");
+var material_1 = require("@angular/material"); //angular material modal
+var cdk_1 = require("@angular/cdk");
+var Observable_1 = require("rxjs/Observable");
+var user_service_1 = require("../service/user.service");
+var global_1 = require("../shared/global");
+var optype_1 = require("../shared/optype");
+var modal_component_1 = require("./modal.component");
 // will use the reactive forms style, with ts separated from html/css
 var UserComponent = (function () {
     // FormBuilder and UserService injected with DI by ng (see Providers in app.)
-    function UserComponent(formBuilder, userService) {
-        this.formBuilder = formBuilder;
+    function UserComponent(userService, modal) {
         this.userService = userService;
+        this.modal = modal;
         this.indLoading = false;
     }
     UserComponent.prototype.ngOnInit = function () {
-        this.userForm = this.formBuilder.group({
-            Id: [''],
-            FirstName: ['', forms_1.Validators.required],
-            LastName: [''],
-            Gender: ['']
-        });
         this.loadUsers();
     };
     UserComponent.prototype.loadUsers = function () {
@@ -39,106 +45,88 @@ var UserComponent = (function () {
             .subscribe(function (allUsers) {
             _this.users = allUsers;
             _this.indLoading = false;
+            _this.dataSource = new TableDataSource(_this.users);
         }, function (error) {
             _this.msg = error;
         });
     };
-    UserComponent.prototype.setControlsState = function (enable) {
-        //makes the controls read-only or editable
-        enable ? this.userForm.enable() : this.userForm.disable();
-    };
-    UserComponent.prototype.addUser = function () {
-        this.dbops = optype_1.DbOperation.Create;
-        this.setControlsState(true);
-        this.modalTitle = "Add New User";
-        this.modalBtnTitle = "Add";
-        this.userForm.reset();
-        this.modal.open();
-    };
-    UserComponent.prototype.editUser = function (userid) {
-        this.dbops = optype_1.DbOperation.Update;
-        this.setControlsState(true);
-        this.modalTitle = "Edit User";
-        this.modalBtnTitle = "Save";
-        this.user = this.users.filter(function (u) { return u.Id == userid; })[0];
-        this.userForm.setValue(this.user);
-        this.modal.open();
-    };
-    UserComponent.prototype.deleteUser = function (userid) {
-        this.dbops = optype_1.DbOperation.Delete;
-        this.setControlsState(true);
-        this.modalTitle = "Delete User";
-        this.modalBtnTitle = "Delete";
-        this.user = this.users.filter(function (u) { return u.Id == userid; })[0];
-        this.userForm.setValue(this.user);
-        this.modal.open();
-    };
-    UserComponent.prototype.onSubmit = function (formData) {
-        this.msg = "";
-        switch (this.dbops) {
-            case optype_1.DbOperation.Create:
-                this.handleSubmitOnCreate(formData);
-                break;
-            case optype_1.DbOperation.Update:
-                break;
-            case optype_1.DbOperation.Delete:
-                break;
-        }
-    };
-    UserComponent.prototype.handleSubmitOnCreate = function (formData) {
+    UserComponent.prototype.addUserClick = function () {
         var _this = this;
-        this.userService.post(global_1.Global.BASE_USER_ENDPOINT, formData._value)
-            .subscribe(function (data) {
-            if (data == 1) {
-                _this.msg = "Saved successfully.";
-                _this.loadUsers();
+        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+            height: '60%',
+            width: '80%',
+            data: {
+                user: {},
+                modalTitle: "Add New User",
+                modalBtnTitle: "Add",
+                dpOpType: optype_1.DbOperation.Create
             }
-            else {
-                _this.msg = "Cannot add new user; database error occured.";
-            }
-            _this.modal.dismiss();
-        }, function (error) { _this.msg = error; });
+        });
+        dialogRef.afterClosed().subscribe(function (msg) {
+            _this.loadUsers();
+            _this.msg = msg;
+        });
     };
-    UserComponent.prototype.handleSubmitOnUpdate = function (formData) {
+    UserComponent.prototype.editUserClick = function (userid) {
         var _this = this;
-        this.userService.put(global_1.Global.BASE_USER_ENDPOINT, formData._value.Id, formData._value)
-            .subscribe(function (data) {
-            if (data == 1) {
-                _this.msg = "Saved successfully.";
-                _this.loadUsers();
+        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+            height: '60%',
+            width: '80%',
+            data: {
+                user: this.users.filter(function (u) { return u.Id == userid; })[0],
+                modalTitle: "Edit User",
+                modalBtnTitle: "Save",
+                dpOpType: optype_1.DbOperation.Update
             }
-            else {
-                _this.msg = "Cannot add new user; database error occured.";
-            }
-            _this.modal.dismiss();
-        }, function (error) { _this.msg = error; });
+        });
+        dialogRef.afterClosed().subscribe(function (msg) {
+            _this.loadUsers();
+            _this.msg = msg;
+        });
     };
-    UserComponent.prototype.handleSubmitOnDelete = function (formData) {
+    UserComponent.prototype.deleteUserClick = function (userid) {
         var _this = this;
-        this.userService.delete(global_1.Global.BASE_USER_ENDPOINT, formData._value.Id)
-            .subscribe(function (data) {
-            if (data == 1) {
-                _this.msg = "Saved successfully.";
-                _this.loadUsers();
+        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+            height: '60%',
+            width: '80%',
+            data: {
+                user: this.users.filter(function (u) { return u.Id == userid; })[0],
+                modalTitle: "Delete User",
+                modalBtnTitle: "Delete",
+                dpOpType: optype_1.DbOperation.Delete
             }
-            else {
-                _this.msg = "Cannot add new user; database error occured.";
-            }
-            _this.modal.dismiss();
-        }, function (error) { _this.msg = error; });
+        });
+        dialogRef.afterClosed().subscribe(function (msg) {
+            _this.loadUsers();
+            _this.msg = msg;
+        });
     };
     return UserComponent;
 }());
-__decorate([
-    core_1.ViewChild('modal'),
-    __metadata("design:type", ng2_bs3_modal_1.ModalComponent)
-], UserComponent.prototype, "modal", void 0);
 UserComponent = __decorate([
     core_1.Component({
         //selector: none - we do not specify a selector because we are not going to use it in any other component
         templateUrl: 'app/Components/user.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, material_1.MdDialog])
 ], UserComponent);
 exports.UserComponent = UserComponent;
+var TableDataSource = (function (_super) {
+    __extends(TableDataSource, _super);
+    function TableDataSource(userList) {
+        var _this = _super.call(this) || this;
+        _this.userList = userList;
+        return _this;
+    }
+    TableDataSource.prototype.connect = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(_this.userList);
+            observer.complete();
+        });
+    };
+    TableDataSource.prototype.disconnect = function () { };
+    return TableDataSource;
+}(cdk_1.DataSource));
+exports.TableDataSource = TableDataSource;
 //# sourceMappingURL=user.component.js.map
