@@ -16,7 +16,7 @@
                 
                 <ng-container cdkColumnDef="Username">
                     <md-header-cell *cdkHeaderCellDef>Username</md-header-cell>
-                    <md-cell *ckdCellDef="let row">{{row.id}}</md-cell>
+                    <md-cell *ckdCellDef="let row">{{row.Username}}</md-cell>
                 </ng-container>
                 
                 <ng-container cdkColumnDef="DisplayName">
@@ -45,8 +45,6 @@
                 <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
                 <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
             </md-table>
-            <div>
-            </div>
         </div>
         <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
             <!-- Displayed only if msg has value. -->

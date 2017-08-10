@@ -1,9 +1,8 @@
 ﻿import { Component } from '@angular/core';
 
 @Component({
-    template: `
-                <img src="/images/main_heart.png" style='text-align:center;'/>
-              `
+    templateUrl: 'app/Components/home.component.html',
+    styleUrls: ['app/Components/home.component.css']
 })
 
 export class HomeComponent {

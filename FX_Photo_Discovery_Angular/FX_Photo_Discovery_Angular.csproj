@@ -187,7 +187,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\Components\home.component.css" />
+    <Content Include="app\Components\home.component.html" />
     <Content Include="app\Components\user.component.html" />
     <Content Include="App_Data\UserDB.mdf" />
     <Content Include="App_Data\UserDB_log.ldf">
@@ -279,6 +282,7 @@
     <TypeScriptCompile Include="app\Components\modal.component.ts" />
     <TypeScriptCompile Include="app\Components\user.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\material.module.ts" />
     <TypeScriptCompile Include="app\Models\modaldata.ts" />
     <TypeScriptCompile Include="app\Models\user.ts" />
     <TypeScriptCompile Include="app\Service\user.service.ts" />

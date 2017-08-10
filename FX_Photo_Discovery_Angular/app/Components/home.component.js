@@ -14,7 +14,8 @@ var HomeComponent = (function () {
 }());
 HomeComponent = __decorate([
     core_1.Component({
-        template: "\n                <img src=\"/images/main_heart.png\" style='text-align:center;'/>\n              "
+        templateUrl: 'app/Components/home.component.html',
+        styleUrls: ['app/Components/home.component.css']
     })
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;

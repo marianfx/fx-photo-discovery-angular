@@ -44,8 +44,8 @@ var UserComponent = (function () {
         this.userService.get(global_1.Global.BASE_USER_ENDPOINT)
             .subscribe(function (allUsers) {
             _this.users = allUsers;
-            _this.indLoading = false;
             _this.dataSource = new TableDataSource(_this.users);
+            _this.indLoading = false;
         }, function (error) {
             _this.msg = error;
         });

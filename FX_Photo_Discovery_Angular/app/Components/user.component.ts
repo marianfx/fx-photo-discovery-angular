@@ -34,8 +34,8 @@ export class UserComponent implements OnInit {//on init will do stuff
         this.userService.get(Global.BASE_USER_ENDPOINT)
             .subscribe(allUsers => {
                     this.users = allUsers;
-                    this.indLoading = false;
                     this.dataSource = new TableDataSource(this.users);
+                    this.indLoading = false;
                 },
                 error => {
                     this.msg = error;
@@ -98,13 +98,13 @@ export class UserComponent implements OnInit {//on init will do stuff
     }
 }
 
-export class TableDataSource extends DataSource<IUser> {
+export class TableDataSource extends DataSource<any> {
     constructor(private userList: IUser[]) {
         super();
     }
 
-    connect(): Observable<IUser[]> {
-        return Observable.create((observer: Subscriber<IUser[]>) => {
+    connect(): Observable<any> {
+        return Observable.create((observer: Subscriber<any>) => {
             observer.next(this.userList);
             observer.complete();
         });
