@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FX_Photo_Discovery_Angular", "FX_Photo_Discovery_Angular\FX_Photo_Discovery_Angular.csproj", "{D58CB412-0DFC-4BC7-9223-9698E3AA6A4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App Web Layer", "FX_Photo_Discovery_Angular\App Web Layer.csproj", "{D58CB412-0DFC-4BC7-9223-9698E3AA6A4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App REST Layer", "App REST Layer\App REST Layer.csproj", "{0A94AA2A-03F7-418F-B442-A1F88DD29C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App Data Layer", "App Data Layer\App Data Layer.csproj", "{BF93BA16-ACDC-4F11-953D-98C052F6DE64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{9DBBF5BA-0205-4B55-B151-A933C4C77BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{D58CB412-0DFC-4BC7-9223-9698E3AA6A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D58CB412-0DFC-4BC7-9223-9698E3AA6A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D58CB412-0DFC-4BC7-9223-9698E3AA6A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A94AA2A-03F7-418F-B442-A1F88DD29C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A94AA2A-03F7-418F-B442-A1F88DD29C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A94AA2A-03F7-418F-B442-A1F88DD29C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A94AA2A-03F7-418F-B442-A1F88DD29C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF93BA16-ACDC-4F11-953D-98C052F6DE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF93BA16-ACDC-4F11-953D-98C052F6DE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF93BA16-ACDC-4F11-953D-98C052F6DE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF93BA16-ACDC-4F11-953D-98C052F6DE64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBBF5BA-0205-4B55-B151-A933C4C77BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBBF5BA-0205-4B55-B151-A933C4C77BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBBF5BA-0205-4B55-B151-A933C4C77BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBBF5BA-0205-4B55-B151-A933C4C77BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
