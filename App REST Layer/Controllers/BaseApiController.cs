@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using Newtonsoft.Json;
 using App_Data_Layer.Repositories.Interfaces;
+using Newtonsoft.Json;
 
-namespace FX_Photo_Discovery_Angular.Controllers
+namespace App_REST_Layer.Controllers
 {
     public class BaseApiController<T> : ApiController
     {

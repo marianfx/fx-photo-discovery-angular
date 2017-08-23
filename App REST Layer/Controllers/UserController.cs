@@ -4,7 +4,7 @@ using App_Data_Layer;
 using App_Data_Layer.Repositories.Interfaces;
 using Utilities;
 
-namespace FX_Photo_Discovery_Angular.Controllers
+namespace App_REST_Layer.Controllers
 {
     [RoutePrefix("api/User")]
     public class UserController : BaseApiController<User>

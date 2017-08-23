@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace App_REST_Layer.Models
 {
@@ -21,7 +20,7 @@ namespace App_REST_Layer.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("UsersDbContext", throwIfV1Schema: false)
         {
         }
         

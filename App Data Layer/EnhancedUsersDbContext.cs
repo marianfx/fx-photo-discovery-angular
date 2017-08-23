@@ -5,7 +5,7 @@
         public EnhancedUsersDbContext(): base()
         {
             //add real password
-            Database.Connection.ConnectionString = Database.Connection.ConnectionString.Replace("xxxx","fxdb");
+            Database.Connection.ConnectionString = Database.Connection.ConnectionString.Replace("xxxx","sqldb");
         }
     }
 }
