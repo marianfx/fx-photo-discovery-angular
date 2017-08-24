@@ -7,6 +7,11 @@ namespace App_REST_Layer
     {
         public static void Register(HttpConfiguration config)
         {
+            // CORS Enabled to allow requests from other sources than this app (this is gonna be a public REST API)
+            // found it on https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+            // also need to decorate the controllers
+            config.EnableCors();
+
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
