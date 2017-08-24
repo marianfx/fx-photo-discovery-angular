@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
 /*Observables.
 Observables are the next thing introduced in ES7 (not available tho, so use them with the rxjs library).
 They are the advanced version of promises and can be used to make http requests (promises are the advanced versions of callbacks).
@@ -18,49 +18,48 @@ They are the advanced version of promises and can be used to make http requests 
  - They are cancellable.
  - The operators available: map, filter, take, skip, debounce
 */
-var Observable_1 = require("rxjs/Observable");
+const Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/catch");
-var UserService = (function () {
-    function UserService(_http) {
+let UserService = class UserService {
+    constructor(_http) {
         this._http = _http;
     } //this is the poor man DI (angular will instantiate the needed classes)
-    UserService.prototype.get = function (url) {
+    get(url) {
         return this._http.get(url) //this returns an Observable<Response> list
-            .map(function (response) { return response.json(); }) //for each element of the list, map tells us what to do with it (return). This will transform each element to JSON => the method will return finally an array of JSON
-            .do(function (data) { return console.log(JSON.stringify(data)); }) //i think this executed at the end, but don't know for sure
+            .map((response) => response.json()) //for each element of the list, map tells us what to do with it (return). This will transform each element to JSON => the method will return finally an array of JSON
+            .do((data) => console.log(JSON.stringify(data))) //i think this executed at the end, but don't know for sure
             .catch(this.handleError); //catch the error
-    };
-    UserService.prototype.post = function (url, model) {
-        var body = JSON.stringify(model);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
+    }
+    post(url, model) {
+        let body = JSON.stringify(model);
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        let options = new http_1.RequestOptions({ headers: headers });
         return this._http.post(url, body, options)
-            .map(function (response) { return response.json(); })
+            .map((response) => response.json())
             .catch(this.handleError);
-    };
-    UserService.prototype.put = function (url, id, model) {
-        var body = JSON.stringify(model);
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
+    }
+    put(url, id, model) {
+        let body = JSON.stringify(model);
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        let options = new http_1.RequestOptions({ headers: headers });
         return this._http.put(url + id, body, options)
-            .map(function (response) { return response.json(); })
+            .map((response) => response.json())
             .catch(this.handleError);
-    };
-    UserService.prototype.delete = function (url, id) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
+    }
+    delete(url, id) {
+        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        let options = new http_1.RequestOptions({ headers: headers });
         return this._http.delete(url + id, options)
-            .map(function (response) { return response.json(); })
+            .map((response) => response.json())
             .catch(this.handleError);
-    };
-    UserService.prototype.handleError = function (error) {
+    }
+    handleError(error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || "Server error happened in User service.");
-    };
-    return UserService;
-}());
+    }
+};
 UserService = __decorate([
     core_1.Injectable() //declares this services as injectival (as in DI)
     ,

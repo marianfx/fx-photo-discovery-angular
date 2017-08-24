@@ -1,59 +1,46 @@
-﻿<md-card>
-    <md-card-title>User Management</md-card-title>
-    <md-card-content>
-        <div class='mat-elevation-z8'>
-            <div style="padding-bottom: 10px">
-                <button md-button (click)="addUserClick()"><md-icon>plus_one</md-icon>Add</button><!--(click) here means event binding with Angular. That's it. (click) is an event.-->
-            </div>
-            <div class="alert alert-info" role="alert" *ngIf="indLoading">
-                <!-- *ngIf="xxx" = conditia care daca e true seteaza vizibilitatea elementului.-->
-                <img src="../../images/loading.gif" width="32" height="32" /> Loading...
-            </div>
+﻿<div class="row">
+    <div class="col s12">
+        <!-- Add Button -->
+        <a class="btn-floating btn-large waves-effect waves-light green" (click)="addUserClick()"><i class="material-icons">add</i></a>
 
-            <!-- The users display -->
-            <div *ngIf='users && users.length == 0' class="alert alert-info" role="alert">No record found!</div> <!-- No records. -->
-            <md-table #table *ngIf='users && users.length' [dataSource]="dataSource">
-                
-                <ng-container cdkColumnDef="Username">
-                    <md-header-cell *cdkHeaderCellDef>Username</md-header-cell>
-                    <md-cell *ckdCellDef="let row">{{row.Username}}</md-cell>
-                </ng-container>
-                
-                <ng-container cdkColumnDef="DisplayName">
-                    <md-header-cell *cdkHeaderCellDef>Display Name</md-header-cell>
-                    <md-cell *ckdCellDef="let row">{{row.DisplayName}}</md-cell>
-                </ng-container>
-                
-                <ng-container cdkColumnDef="Gender">
-                    <md-header-cell *cdkHeaderCellDef>Gender</md-header-cell>
-                    <md-cell *ckdCellDef="let row">{{row.Gender}}</md-cell>
-                </ng-container>
-
-                <ng-container cdkColumnDef="ProfileUrl">
-                    <md-header-cell *cdkHeaderCellDef>Profile URL</md-header-cell>
-                    <md-cell *ckdCellDef="let row">{{row.ProfileUrl}}</md-cell>
-                </ng-container>
-
-                <ng-container cdkColumnDef="Id">
-                    <md-header-cell *cdkHeaderCellDef> </md-header-cell>
-                    <md-cell *ckdCellDef="let row">
-                        <button md-button title="Edit" (click)="editUserCLick(row.Id)"><md-icon>mode_edit</md-icon>Edit</button> <!-- Event again. -->
-                        <button md-button color="accent" title="Delete" (click)="deleteUserClick(row.Id)"><md-icon>report_problem</md-icon>Delete</button> <!-- Event again. -->
-                    </md-cell>
-                </ng-container>
-                
-                <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-                <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-            </md-table>
+        <!-- Loading -->
+        <div class="progress" *ngIf="indLoading">
+            <div class="indeterminate"></div>
         </div>
-        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
-            <!-- Displayed only if msg has value. -->
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            {{msg}}
+
+        <!-- Table visible if users -->
+        <table class="responsive-table" *ngIf="users && users.length">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Display Name</th>
+                <th>Gender</th>
+                <th>IG Profile URL</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{user.Username}}</td>
+                    <td>{{user.DsplayName}}</td>
+                    <td>{{user.Gender}}</td>
+                    <td>{{user.ProfileUrl}}</td>
+                    <td>
+                        <button class="btn btn-floating waves-effect waves-light cyan" title="Edit" (click)="editUserCLick(row.Id)">
+                            <i class="material-icons">update</i>
+                            Edit
+                        </button>
+                        <button class="btn btn-floating waves-effect waves-light red" title="Delete" (click)="deleteUserClick(row.Id)">
+                            <i class="material-icons">delete</i>
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col s12 center-align">
+            <alert *ngIf='users && users.length == 0' #alertIfNoUsers></alert>
+            <alert *ngIf='msg' #alertIfMessage></alert>
         </div>
-    </md-card-content>
-</md-card>
+    </div>
+</div>

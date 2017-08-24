@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
 import { UserComponent } from './components/user.component';
 import { ModalComponent } from './components/modal.component';
+import { AlertComponent } from './Components/Helpers/alert.component';
 
 //import services
 import { UserService } from './service/user.service';
@@ -26,7 +27,7 @@ import { UserService } from './service/user.service';
 // here we declare module metadatas
 @NgModule({
     imports: [BrowserModule, BrowserAnimationsModule, ReactiveFormsModule, HttpModule, routing, MaterialModule],//what MODULES this module loads. Also loads the animations globally.
-    declarations: [AppComponent, HomeComponent, UserComponent, ModalComponent],//what COMPONENTS this module has (this is the root module, so handles them all; will know to inject them.)
+    declarations: [AppComponent, HomeComponent, UserComponent, ModalComponent, AlertComponent],//what COMPONENTS this module has (this is the root module, so handles them all; will know to inject them.)
     providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService],//what SERVICES will be used
     entryComponents: [ModalComponent],
     bootstrap: [AppComponent]//the ENTRY (start) COMPONENT

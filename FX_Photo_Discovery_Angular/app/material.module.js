@@ -6,16 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core"); //the needed Module class (declaration below)
-var material_1 = require("@angular/material");
-var cdk_1 = require("@angular/cdk");
+const core_1 = require("@angular/core"); //the needed Module class (declaration below)
+const material_1 = require("@angular/material");
+const cdk_1 = require("@angular/cdk");
 // here we declare module metadatas
-var MaterialModule = (function () {
-    // here the actual module is exported
-    function MaterialModule() {
-    }
-    return MaterialModule;
-}());
+let MaterialModule = 
+// here the actual module is exported
+class MaterialModule {
+};
 MaterialModule = __decorate([
     core_1.NgModule({
         exports: [material_1.MdDialogModule, material_1.MdToolbarModule, material_1.MdButtonModule, material_1.MdIconModule, material_1.MdCardModule, cdk_1.CdkTableModule, material_1.MdTableModule]

@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,40 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core"); //OnInit event + ViewChild to acces modal data
-var material_1 = require("@angular/material"); //angular material modal
-var cdk_1 = require("@angular/cdk");
-var Observable_1 = require("rxjs/Observable");
-var user_service_1 = require("../service/user.service");
-var global_1 = require("../shared/global");
-var optype_1 = require("../shared/optype");
-var modal_component_1 = require("./modal.component");
+const core_1 = require("@angular/core"); //OnInit event + ViewChild to acces modal data
+const material_1 = require("@angular/material"); //angular material modal
+const cdk_1 = require("@angular/cdk");
+const Observable_1 = require("rxjs/Observable");
+const user_service_1 = require("../service/user.service");
+const global_1 = require("../shared/global");
+const optype_1 = require("../shared/optype");
+const modal_component_1 = require("./modal.component");
+const alert_component_1 = require("./Helpers/alert.component");
 // will use the reactive forms style, with ts separated from html/css
-var UserComponent = (function () {
+let UserComponent = class UserComponent {
     // FormBuilder and UserService injected with DI by ng (see Providers in app.)
-    function UserComponent(userService, modal) {
+    constructor(userService, modal) {
         this.userService = userService;
         this.modal = modal;
         this.indLoading = false;
     }
-    UserComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         this.loadUsers();
-    };
-    UserComponent.prototype.loadUsers = function () {
-        var _this = this;
+    }
+    loadUsers() {
         this.indLoading = true;
         this.userService.get(global_1.Global.BASE_USER_ENDPOINT)
-            .subscribe(function (allUsers) {
-            _this.users = allUsers;
-            _this.dataSource = new TableDataSource(_this.users);
-            _this.indLoading = false;
-        }, function (error) {
-            _this.msg = error;
+            .subscribe(allUsers => {
+            this.users = allUsers;
+            this.dataSource = new TableDataSource(this.users);
+            this.indLoading = false;
+        }, error => {
+            this.msg = error;
         });
-    };
-    UserComponent.prototype.addUserClick = function () {
-        var _this = this;
-        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+    }
+    addUserClick() {
+        let dialogRef = this.modal.open(modal_component_1.ModalComponent, {
             height: '60%',
             width: '80%',
             data: {
@@ -62,47 +51,52 @@ var UserComponent = (function () {
                 dpOpType: optype_1.DbOperation.Create
             }
         });
-        dialogRef.afterClosed().subscribe(function (msg) {
-            _this.loadUsers();
-            _this.msg = msg;
+        dialogRef.afterClosed().subscribe(msg => {
+            this.loadUsers();
+            this.msg = msg;
         });
-    };
-    UserComponent.prototype.editUserClick = function (userid) {
-        var _this = this;
-        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+    }
+    editUserClick(userid) {
+        let dialogRef = this.modal.open(modal_component_1.ModalComponent, {
             height: '60%',
             width: '80%',
             data: {
-                user: this.users.filter(function (u) { return u.Id == userid; })[0],
+                user: this.users.filter(u => u.Id == userid)[0],
                 modalTitle: "Edit User",
                 modalBtnTitle: "Save",
                 dpOpType: optype_1.DbOperation.Update
             }
         });
-        dialogRef.afterClosed().subscribe(function (msg) {
-            _this.loadUsers();
-            _this.msg = msg;
+        dialogRef.afterClosed().subscribe(msg => {
+            this.loadUsers();
+            this.msg = msg;
         });
-    };
-    UserComponent.prototype.deleteUserClick = function (userid) {
-        var _this = this;
-        var dialogRef = this.modal.open(modal_component_1.ModalComponent, {
+    }
+    deleteUserClick(userid) {
+        let dialogRef = this.modal.open(modal_component_1.ModalComponent, {
             height: '60%',
             width: '80%',
             data: {
-                user: this.users.filter(function (u) { return u.Id == userid; })[0],
+                user: this.users.filter(u => u.Id == userid)[0],
                 modalTitle: "Delete User",
                 modalBtnTitle: "Delete",
                 dpOpType: optype_1.DbOperation.Delete
             }
         });
-        dialogRef.afterClosed().subscribe(function (msg) {
-            _this.loadUsers();
-            _this.msg = msg;
+        dialogRef.afterClosed().subscribe(msg => {
+            this.loadUsers();
+            this.msg = msg;
         });
-    };
-    return UserComponent;
-}());
+    }
+};
+__decorate([
+    core_1.ViewChild('alertIfNoUsers'),
+    __metadata("design:type", alert_component_1.AlertComponent)
+], UserComponent.prototype, "usersAlert", void 0);
+__decorate([
+    core_1.ViewChild('alertIfMessage'),
+    __metadata("design:type", alert_component_1.AlertComponent)
+], UserComponent.prototype, "messageAlert", void 0);
 UserComponent = __decorate([
     core_1.Component({
         //selector: none - we do not specify a selector because we are not going to use it in any other component
@@ -111,22 +105,18 @@ UserComponent = __decorate([
     __metadata("design:paramtypes", [user_service_1.UserService, material_1.MdDialog])
 ], UserComponent);
 exports.UserComponent = UserComponent;
-var TableDataSource = (function (_super) {
-    __extends(TableDataSource, _super);
-    function TableDataSource(userList) {
-        var _this = _super.call(this) || this;
-        _this.userList = userList;
-        return _this;
+class TableDataSource extends cdk_1.DataSource {
+    constructor(userList) {
+        super();
+        this.userList = userList;
     }
-    TableDataSource.prototype.connect = function () {
-        var _this = this;
-        return Observable_1.Observable.create(function (observer) {
-            observer.next(_this.userList);
+    connect() {
+        return Observable_1.Observable.create((observer) => {
+            observer.next(this.userList);
             observer.complete();
         });
-    };
-    TableDataSource.prototype.disconnect = function () { };
-    return TableDataSource;
-}(cdk_1.DataSource));
+    }
+    disconnect() { }
+}
 exports.TableDataSource = TableDataSource;
 //# sourceMappingURL=user.component.js.map

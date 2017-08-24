@@ -1,0 +1,16 @@
+﻿.blue-gradient {
+    background: -webkit-linear-gradient(50deg,#45cafc,#303f9f);
+    background: linear-gradient(40deg,#45cafc,#303f9f);
+}
+
+.btn-rounded {
+    border-radius: 10em;
+}
+
+.btn .blue-gradient {
+    background: -webkit-linear-gradient(50deg,#45cafc,#303f9f);
+    background: linear-gradient(40deg,#45cafc,#303f9f);
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+}
+

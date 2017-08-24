@@ -35,8 +35,8 @@
     "@angular/platform-browser": "^4.3.4",
     "@angular/platform-browser-dynamic": "^4.3.4",
     "@angular/router": "^4.3.4",
-    "angular2-in-memory-web-api": "0.0.21",
     "core-js": "^2.5.0",
+    "materialize-css": "^0.100.1",
     "rxjs": "^5.4.3",
     "systemjs": "0.19.40",
     "zone.js": "^0.8.14"
@@ -59,7 +59,7 @@
     "protractor": "~4.0.14",
     "rimraf": "^2.5.4",
     "tslint": "^3.15.1",
-    "typescript": "^2.4.2"
+    "typescript": "^2.5.1"
   },
   "repository": {}
 }

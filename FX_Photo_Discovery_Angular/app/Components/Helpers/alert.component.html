@@ -1,0 +1,8 @@
+<div class="card {{color}}" *ngIf='isVisible'>
+    <div class="card-content white-text">
+        <p>{{message}}</p>
+    </div>
+    <button *ngIf="canBeCLosed" type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>

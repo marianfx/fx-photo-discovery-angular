@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';//OnInit event + ViewChild to acces modal data
+﻿import { Component, OnInit, ViewChild } from '@angular/core';//OnInit event + ViewChild to acces modal data
 import { MdDialog, MdDialogRef } from '@angular/material';//angular material modal
 import { DataSource } from '@angular/cdk';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +9,7 @@ import { IUser } from '../models/user';
 import { Global } from '../shared/global';
 import { DbOperation } from "../shared/optype";
 import { ModalComponent } from './modal.component';
+import { AlertComponent } from './Helpers/alert.component';
 
 // will use the reactive forms style, with ts separated from html/css
 @Component({
@@ -17,6 +18,8 @@ import { ModalComponent } from './modal.component';
 })
 export class UserComponent implements OnInit {//on init will do stuff
     
+    @ViewChild('alertIfNoUsers') usersAlert: AlertComponent;
+    @ViewChild('alertIfMessage') messageAlert: AlertComponent;
     users: IUser[];//keeps list of users
     msg: string;
     indLoading: boolean = false;

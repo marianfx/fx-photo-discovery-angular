@@ -12,21 +12,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var material_1 = require("@angular/material");
-var forms_1 = require("@angular/forms"); //load reactive forms + validations
-var material_2 = require("@angular/material"); //this allows data injection
-var user_service_1 = require("../service/user.service");
-var global_1 = require("../shared/global");
-var optype_1 = require("../shared/optype");
-var ModalComponent = (function () {
-    function ModalComponent(formBuilder, userService, modalRef, data) {
+const core_1 = require("@angular/core");
+const material_1 = require("@angular/material");
+const forms_1 = require("@angular/forms"); //load reactive forms + validations
+const material_2 = require("@angular/material"); //this allows data injection
+const user_service_1 = require("../service/user.service");
+const global_1 = require("../shared/global");
+const optype_1 = require("../shared/optype");
+let ModalComponent = class ModalComponent {
+    constructor(formBuilder, userService, modalRef, data) {
         this.formBuilder = formBuilder;
         this.userService = userService;
         this.modalRef = modalRef;
         this.data = data;
     }
-    ModalComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         this.userForm = this.formBuilder.group({
             Id: [''],
             Username: ['', forms_1.Validators.required],
@@ -36,12 +36,12 @@ var ModalComponent = (function () {
         });
         this.setControlsState(true);
         //this.userForm.reset();
-    };
-    ModalComponent.prototype.setControlsState = function (enable) {
+    }
+    setControlsState(enable) {
         //makes the controls read-only or editable
         enable ? this.userForm.enable() : this.userForm.disable();
-    };
-    ModalComponent.prototype.onSubmit = function (formData) {
+    }
+    onSubmit(formData) {
         switch (this.data.dpOpType) {
             case optype_1.DbOperation.Create:
                 this.handleSubmitOnCreate(formData);
@@ -51,37 +51,32 @@ var ModalComponent = (function () {
             case optype_1.DbOperation.Delete:
                 break;
         }
-    };
-    ModalComponent.prototype.onClose = function (msg) {
-        if (msg === void 0) { msg = ""; }
+    }
+    onClose(msg = "") {
         this.modalRef.close(msg);
-    };
-    ModalComponent.prototype.handleSubmitOnCreate = function (formData) {
-        var _this = this;
+    }
+    handleSubmitOnCreate(formData) {
         this.userService.post(global_1.Global.BASE_USER_ENDPOINT, formData._value)
-            .subscribe(function (data) {
-            var msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
-            _this.onClose(msg);
-        }, function (error) { _this.onClose(error); });
-    };
-    ModalComponent.prototype.handleSubmitOnUpdate = function (formData) {
-        var _this = this;
+            .subscribe(data => {
+            let msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
+            this.onClose(msg);
+        }, error => { this.onClose(error); });
+    }
+    handleSubmitOnUpdate(formData) {
         this.userService.put(global_1.Global.BASE_USER_ENDPOINT, formData._value.Id, formData._value)
-            .subscribe(function (data) {
-            var msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
-            _this.onClose(msg);
-        }, function (error) { _this.onClose(error); });
-    };
-    ModalComponent.prototype.handleSubmitOnDelete = function (formData) {
-        var _this = this;
+            .subscribe(data => {
+            let msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
+            this.onClose(msg);
+        }, error => { this.onClose(error); });
+    }
+    handleSubmitOnDelete(formData) {
         this.userService.delete(global_1.Global.BASE_USER_ENDPOINT, formData._value.Id)
-            .subscribe(function (data) {
-            var msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
-            _this.onClose(msg);
-        }, function (error) { _this.onClose(error); });
-    };
-    return ModalComponent;
-}());
+            .subscribe(data => {
+            let msg = data == 1 ? "Saved successfully." : "Cannot add new user; database error occured.";
+            this.onClose(msg);
+        }, error => { this.onClose(error); });
+    }
+};
 ModalComponent = __decorate([
     core_1.Component({
         //selector: 'modal-users',

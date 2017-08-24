@@ -7,12 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // the main application
-var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-    }
-    return AppComponent;
-}());
+const core_1 = require("@angular/core");
+let AppComponent = class AppComponent {
+};
 AppComponent = __decorate([
     core_1.Component({
         selector: 'user-app',
